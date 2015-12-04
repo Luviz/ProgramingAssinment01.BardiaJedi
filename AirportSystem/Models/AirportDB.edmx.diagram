@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0bc96c9210684c8ca9be17af1dd9f233" Name="Diagram1" >
+        <EntityTypeShape EntityType="AirportDB.Airport" Width="1.5" PointX="10.5" PointY="3.625" />
+        <EntityTypeShape EntityType="AirportDB.Airplane" Width="1.5" PointX="3.75" PointY="3.25" />
+        <EntityTypeShape EntityType="AirportDB.City" Width="1.5" PointX="10.5" PointY="1.5" />
+        <EntityTypeShape EntityType="AirportDB.Pilot" Width="1.875" PointX="8.125" PointY="1.5" />
+        <EntityTypeShape EntityType="AirportDB.AirplaneType" Width="1.5" PointX="3.75" PointY="0.75" />
+        <AssociationConnector Association="AirportDB.CityPilot" />
+        <AssociationConnector Association="AirportDB.AirportCity" />
+        <AssociationConnector Association="AirportDB.AirplaneTypesAirplane" />
+        <EntityTypeShape EntityType="AirportDB.Pilot_AirPlaneType" Width="1.5" PointX="6.125" PointY="0.5" />
+        <AssociationConnector Association="AirportDB.AirplaneTypesPilot_AirPlaneType" />
+        <AssociationConnector Association="AirportDB.PilotPilot_AirPlaneType" />
+        <EntityTypeShape EntityType="AirportDB.Schedule" Width="1.5" PointX="6.125" PointY="2.625" />
+        <AssociationConnector Association="AirportDB.ScheduleAirportFrom" />
+        <AssociationConnector Association="AirportDB.AirportSchedule" />
+        <AssociationConnector Association="AirportDB.AirplaneSchedule" />
+        <AssociationConnector Association="AirportDB.FK_PilotSchedule" />
+        <AssociationConnector Association="AirportDB.FK_PilotSchedule1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

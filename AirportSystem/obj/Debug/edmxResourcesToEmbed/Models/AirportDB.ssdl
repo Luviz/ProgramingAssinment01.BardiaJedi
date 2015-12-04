@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AirportDB.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view '4EDC320A6BADD577EB1ED3A7AC132E13_SUAL STUDIO 2015\PROJECTS\PROGRAMINGASSINMENT01.BARDIAJEDI\AIRPORTSYSTEM\APP_DATA\AIRPORTDB.MDF.dbo.Airplanes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Airplanes">
+    <Key>
+      <PropertyRef Name="RegNumber" />
+    </Key>
+    <Property Name="RegNumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Capacity" Type="smallint" Nullable="false" />
+    <Property Name="Length" Type="float" Nullable="false" />
+    <Property Name="AirplaneTypesId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AirplaneTypes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Airports">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CityId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Citys">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Pilot_AirPlaneTypeSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AirplaneTypesId" Type="int" Nullable="false" />
+    <Property Name="PilotId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PilotSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CityId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ScheduleSet">
+    <Key>
+      <PropertyRef Name="FlightNumber" />
+    </Key>
+    <Property Name="FlightNumber" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FromAirportId" Type="int" Nullable="false" />
+    <Property Name="ToAirportId" Type="int" Nullable="false" />
+    <Property Name="AirplaneRegNumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PilotId" Type="int" Nullable="false" />
+    <Property Name="PilotIdCo" Type="int" />
+    <Property Name="ETA" Type="datetime" Nullable="false" />
+    <Property Name="ETD" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_AirplaneTypesAirplane">
+    <End Role="AirplaneTypes" Type="Self.AirplaneTypes" Multiplicity="1" />
+    <End Role="Airplanes" Type="Self.Airplanes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AirplaneTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Airplanes">
+        <PropertyRef Name="AirplaneTypesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AirplaneTypesPilot_AirPlaneType">
+    <End Role="AirplaneTypes" Type="Self.AirplaneTypes" Multiplicity="1" />
+    <End Role="Pilot_AirPlaneTypeSet" Type="Self.Pilot_AirPlaneTypeSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AirplaneTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Pilot_AirPlaneTypeSet">
+        <PropertyRef Name="AirplaneTypesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AirportCity">
+    <End Role="Citys" Type="Self.Citys" Multiplicity="1" />
+    <End Role="Airports" Type="Self.Airports" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Citys">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Airports">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AirportSchedule">
+    <End Role="Airports" Type="Self.Airports" Multiplicity="1" />
+    <End Role="ScheduleSet" Type="Self.ScheduleSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Airports">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ScheduleSet">
+        <PropertyRef Name="ToAirportId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CityPilot">
+    <End Role="Citys" Type="Self.Citys" Multiplicity="1" />
+    <End Role="PilotSet" Type="Self.PilotSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Citys">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PilotSet">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PilotPilot_AirPlaneType">
+    <End Role="PilotSet" Type="Self.PilotSet" Multiplicity="1" />
+    <End Role="Pilot_AirPlaneTypeSet" Type="Self.Pilot_AirPlaneTypeSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PilotSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Pilot_AirPlaneTypeSet">
+        <PropertyRef Name="PilotId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PilotSchedule">
+    <End Role="PilotSet" Type="Self.PilotSet" Multiplicity="1" />
+    <End Role="ScheduleSet" Type="Self.ScheduleSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PilotSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ScheduleSet">
+        <PropertyRef Name="PilotId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PilotSchedule1">
+    <End Role="PilotSet" Type="Self.PilotSet" Multiplicity="0..1" />
+    <End Role="ScheduleSet" Type="Self.ScheduleSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PilotSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ScheduleSet">
+        <PropertyRef Name="PilotIdCo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ScheduleAirportFrom">
+    <End Role="Airports" Type="Self.Airports" Multiplicity="1" />
+    <End Role="ScheduleSet" Type="Self.ScheduleSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Airports">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ScheduleSet">
+        <PropertyRef Name="FromAirportId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AirportDBStoreContainer">
+    <EntitySet Name="AirplaneTypes" EntityType="Self.AirplaneTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Airports" EntityType="Self.Airports" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Citys" EntityType="Self.Citys" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pilot_AirPlaneTypeSet" EntityType="Self.Pilot_AirPlaneTypeSet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PilotSet" EntityType="Self.PilotSet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ScheduleSet" EntityType="Self.ScheduleSet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Airplanes" EntityType="Self.Airplanes" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Airplanes].[RegNumber] AS [RegNumber], 
+    [Airplanes].[Capacity] AS [Capacity], 
+    [Airplanes].[Length] AS [Length], 
+    [Airplanes].[AirplaneTypesId] AS [AirplaneTypesId]
+    FROM [dbo].[Airplanes] AS [Airplanes]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_AirplaneTypesAirplane" Association="Self.FK_AirplaneTypesAirplane">
+      <End Role="AirplaneTypes" EntitySet="AirplaneTypes" />
+      <End Role="Airplanes" EntitySet="Airplanes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AirplaneTypesPilot_AirPlaneType" Association="Self.FK_AirplaneTypesPilot_AirPlaneType">
+      <End Role="AirplaneTypes" EntitySet="AirplaneTypes" />
+      <End Role="Pilot_AirPlaneTypeSet" EntitySet="Pilot_AirPlaneTypeSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AirportCity" Association="Self.FK_AirportCity">
+      <End Role="Citys" EntitySet="Citys" />
+      <End Role="Airports" EntitySet="Airports" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AirportSchedule" Association="Self.FK_AirportSchedule">
+      <End Role="Airports" EntitySet="Airports" />
+      <End Role="ScheduleSet" EntitySet="ScheduleSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CityPilot" Association="Self.FK_CityPilot">
+      <End Role="Citys" EntitySet="Citys" />
+      <End Role="PilotSet" EntitySet="PilotSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PilotPilot_AirPlaneType" Association="Self.FK_PilotPilot_AirPlaneType">
+      <End Role="PilotSet" EntitySet="PilotSet" />
+      <End Role="Pilot_AirPlaneTypeSet" EntitySet="Pilot_AirPlaneTypeSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PilotSchedule" Association="Self.FK_PilotSchedule">
+      <End Role="PilotSet" EntitySet="PilotSet" />
+      <End Role="ScheduleSet" EntitySet="ScheduleSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PilotSchedule1" Association="Self.FK_PilotSchedule1">
+      <End Role="PilotSet" EntitySet="PilotSet" />
+      <End Role="ScheduleSet" EntitySet="ScheduleSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ScheduleAirportFrom" Association="Self.FK_ScheduleAirportFrom">
+      <End Role="Airports" EntitySet="Airports" />
+      <End Role="ScheduleSet" EntitySet="ScheduleSet" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

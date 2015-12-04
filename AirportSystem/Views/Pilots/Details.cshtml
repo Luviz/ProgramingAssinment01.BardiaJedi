@@ -1,0 +1,101 @@
+﻿@model AirportSystem.Models.Pilot
+
+@{
+	ViewBag.Title = "Details";
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<h2>Details</h2>
+
+<div>
+	<h4>Pilot</h4>
+	<hr />
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.Id)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Id)
+		</dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.FName)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.FName)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.LName)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.LName)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.City.Name)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.City.Name)
+		</dd>
+
+	</dl>
+</div>
+<p>
+	@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+	@Html.ActionLink("Back to List", "Index")
+</p>
+
+
+<div class="container ">
+	<div class="row col-sm-3">
+		<button class="btn btn-link" data-toggle="modal" data-target="#AddLicenseModal"><span class="glyphicon glyphicon-plus"></span> Add Lisences</button>
+		<table class="table table-hover">
+			<tr class="">
+				<th></th>
+				<th>Lissenses</th>
+			</tr>
+			<tbody>
+				@foreach (var item in Model.Pilot_AirPlaneType.OrderBy(p_AP => p_AP.AirplaneTypes.Type)) {
+					<tr>
+						<td class="text-right"><a class="glyphicon glyphicon-remove" href=@Url.Action("RemLicenese", new { id = item.Id})></a></td>
+						<td>@Html.DisplayFor(m => item.AirplaneTypes.Type)</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
+
+<p>
+	@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+	@Html.ActionLink("Back to List", "Index")
+</p>
+
+
+
+<div class="modal fade " id="AddLicenseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content ">
+
+			@using (Html.BeginForm("AddLicense", "Pilots", new { id = Model.Id })) {
+				<div class="modal-body form-inline container text-center">
+					<input class="form-control" autocomplete="off" list="licensesAvailable" placeholder="licenses" name="license" />
+					<input type="submit" value="ADD" class="btn btn-primary" />
+				</div>
+			}
+		</div>
+	</div>
+</div>
+
+
+<datalist id="licensesAvailable">
+	@foreach (var item in ViewBag.licensesAvailable) {
+		<option>@item.Type</option>
+	}
+</datalist>

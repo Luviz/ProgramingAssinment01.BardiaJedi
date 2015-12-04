@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="AirportDB" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="AirportDBContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Airports" EntityType="AirportDB.Airport" />
+    <EntitySet Name="Airplanes" EntityType="AirportDB.Airplane" />
+    <EntitySet Name="Citys" EntityType="AirportDB.City" />
+    <EntitySet Name="PilotSet" EntityType="AirportDB.Pilot" />
+    <EntitySet Name="AirplaneTypes" EntityType="AirportDB.AirplaneType" />
+    <AssociationSet Name="CityPilot" Association="AirportDB.CityPilot">
+      <End Role="Pilot" EntitySet="PilotSet" />
+      <End Role="City" EntitySet="Citys" />
+    </AssociationSet>
+    <AssociationSet Name="AirportCity" Association="AirportDB.AirportCity">
+      <End Role="Airport" EntitySet="Airports" />
+      <End Role="City" EntitySet="Citys" />
+    </AssociationSet>
+    <AssociationSet Name="AirplaneTypesAirplane" Association="AirportDB.AirplaneTypesAirplane">
+      <End Role="AirplaneTypes" EntitySet="AirplaneTypes" />
+      <End Role="Airplane" EntitySet="Airplanes" />
+    </AssociationSet>
+    <EntitySet Name="Pilot_AirPlaneTypeSet" EntityType="AirportDB.Pilot_AirPlaneType" />
+    <AssociationSet Name="AirplaneTypesPilot_AirPlaneType" Association="AirportDB.AirplaneTypesPilot_AirPlaneType">
+      <End Role="AirplaneTypes" EntitySet="AirplaneTypes" />
+      <End Role="Pilot_AirPlaneType" EntitySet="Pilot_AirPlaneTypeSet" />
+    </AssociationSet>
+    <AssociationSet Name="PilotPilot_AirPlaneType" Association="AirportDB.PilotPilot_AirPlaneType">
+      <End Role="Pilot" EntitySet="PilotSet" />
+      <End Role="Pilot_AirPlaneType" EntitySet="Pilot_AirPlaneTypeSet" />
+    </AssociationSet>
+    <EntitySet Name="ScheduleSet" EntityType="AirportDB.Schedule" />
+    <AssociationSet Name="ScheduleAirportFrom" Association="AirportDB.ScheduleAirportFrom">
+      <End Role="Schedule" EntitySet="ScheduleSet" />
+      <End Role="Airport" EntitySet="Airports" />
+    </AssociationSet>
+    <AssociationSet Name="AirportSchedule" Association="AirportDB.AirportSchedule">
+      <End Role="Airport" EntitySet="Airports" />
+      <End Role="Schedule" EntitySet="ScheduleSet" />
+    </AssociationSet>
+    <AssociationSet Name="AirplaneSchedule" Association="AirportDB.AirplaneSchedule">
+      <End Role="Airplane" EntitySet="Airplanes" />
+      <End Role="Schedule" EntitySet="ScheduleSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PilotSchedule" Association="AirportDB.FK_PilotSchedule">
+      <End Role="Pilot" EntitySet="PilotSet" />
+      <End Role="Schedule" EntitySet="ScheduleSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PilotSchedule1" Association="AirportDB.FK_PilotSchedule1">
+      <End Role="Pilot" EntitySet="PilotSet" />
+      <End Role="Schedule" EntitySet="ScheduleSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Airport">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="City" Relationship="AirportDB.AirportCity" FromRole="Airport" ToRole="City" />
+    <Property Name="CityId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Deparcher" Relationship="AirportDB.ScheduleAirportFrom" FromRole="Airport" ToRole="Schedule" />
+    <NavigationProperty Name="Arrivel" Relationship="AirportDB.AirportSchedule" FromRole="Airport" ToRole="Schedule" />
+  </EntityType>
+  <EntityType Name="Airplane">
+    <Key>
+      <PropertyRef Name="RegNumber" />
+    </Key>
+    <Property Name="RegNumber" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Capacity" Type="Int16" Nullable="false" />
+    <Property Name="Length" Type="Double" Nullable="false" />
+    <NavigationProperty Name="AirplaneTypes" Relationship="AirportDB.AirplaneTypesAirplane" FromRole="Airplane" ToRole="AirplaneTypes" />
+    <Property Name="AirplaneTypesId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Schedule" Relationship="AirportDB.AirplaneSchedule" FromRole="Airplane" ToRole="Schedule" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Pilot" Relationship="AirportDB.CityPilot" FromRole="City" ToRole="Pilot" />
+    <NavigationProperty Name="Airport" Relationship="AirportDB.AirportCity" FromRole="City" ToRole="Airport" />
+  </EntityType>
+  <EntityType Name="Pilot">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="LName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="City" Relationship="AirportDB.CityPilot" FromRole="Pilot" ToRole="City" />
+    <Property Name="CityId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Pilot_AirPlaneType" Relationship="AirportDB.PilotPilot_AirPlaneType" FromRole="Pilot" ToRole="Pilot_AirPlaneType" />
+    <NavigationProperty Name="ScheduleSet" Relationship="AirportDB.FK_PilotSchedule" FromRole="Pilot" ToRole="Schedule" />
+    <NavigationProperty Name="ScheduleSet1" Relationship="AirportDB.FK_PilotSchedule1" FromRole="Pilot" ToRole="Schedule" />
+  </EntityType>
+  <EntityType Name="AirplaneType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Airplane" Relationship="AirportDB.AirplaneTypesAirplane" FromRole="AirplaneTypes" ToRole="Airplane" />
+    <NavigationProperty Name="Pilot_AirPlaneType" Relationship="AirportDB.AirplaneTypesPilot_AirPlaneType" FromRole="AirplaneTypes" ToRole="Pilot_AirPlaneType" />
+  </EntityType>
+  <Association Name="CityPilot">
+    <End Type="AirportDB.Pilot" Role="Pilot" Multiplicity="*" />
+    <End Type="AirportDB.City" Role="City" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Pilot">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AirportCity">
+    <End Type="AirportDB.Airport" Role="Airport" Multiplicity="*" />
+    <End Type="AirportDB.City" Role="City" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Airport">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AirplaneTypesAirplane">
+    <End Type="AirportDB.AirplaneType" Role="AirplaneTypes" Multiplicity="1" />
+    <End Type="AirportDB.Airplane" Role="Airplane" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AirplaneTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Airplane">
+        <PropertyRef Name="AirplaneTypesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Pilot_AirPlaneType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="AirplaneTypes" Relationship="AirportDB.AirplaneTypesPilot_AirPlaneType" FromRole="Pilot_AirPlaneType" ToRole="AirplaneTypes" />
+    <Property Name="AirplaneTypesId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Pilot" Relationship="AirportDB.PilotPilot_AirPlaneType" FromRole="Pilot_AirPlaneType" ToRole="Pilot" />
+    <Property Name="PilotId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="AirplaneTypesPilot_AirPlaneType">
+    <End Type="AirportDB.AirplaneType" Role="AirplaneTypes" Multiplicity="1" />
+    <End Type="AirportDB.Pilot_AirPlaneType" Role="Pilot_AirPlaneType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AirplaneTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Pilot_AirPlaneType">
+        <PropertyRef Name="AirplaneTypesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PilotPilot_AirPlaneType">
+    <End Type="AirportDB.Pilot" Role="Pilot" Multiplicity="1" />
+    <End Type="AirportDB.Pilot_AirPlaneType" Role="Pilot_AirPlaneType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pilot">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Pilot_AirPlaneType">
+        <PropertyRef Name="PilotId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Schedule">
+    <Key>
+      <PropertyRef Name="FlightNumber" />
+    </Key>
+    <Property Name="FlightNumber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="From" Relationship="AirportDB.ScheduleAirportFrom" FromRole="Schedule" ToRole="Airport" />
+    <Property Name="FromAirportId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="To" Relationship="AirportDB.AirportSchedule" FromRole="Schedule" ToRole="Airport" />
+    <Property Name="ToAirportId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Airplane" Relationship="AirportDB.AirplaneSchedule" FromRole="Schedule" ToRole="Airplane" />
+    <Property Name="AirplaneRegNumber" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="PilotId" Type="Int32" Nullable="false" />
+    <Property Name="PilotIdCo" Type="Int32" Nullable="true" />
+    <NavigationProperty Name="PilotSet" Relationship="AirportDB.FK_PilotSchedule" FromRole="Schedule" ToRole="Pilot" />
+    <NavigationProperty Name="PilotSet1" Relationship="AirportDB.FK_PilotSchedule1" FromRole="Schedule" ToRole="Pilot" />
+    <Property Name="ETA" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ETD" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <Association Name="ScheduleAirportFrom">
+    <End Type="AirportDB.Schedule" Role="Schedule" Multiplicity="*" />
+    <End Type="AirportDB.Airport" Role="Airport" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Airport">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Schedule">
+        <PropertyRef Name="FromAirportId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AirportSchedule">
+    <End Type="AirportDB.Airport" Role="Airport" Multiplicity="1" />
+    <End Type="AirportDB.Schedule" Role="Schedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Airport">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Schedule">
+        <PropertyRef Name="ToAirportId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AirplaneSchedule">
+    <End Type="AirportDB.Airplane" Role="Airplane" Multiplicity="1" />
+    <End Type="AirportDB.Schedule" Role="Schedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Airplane">
+        <PropertyRef Name="RegNumber" />
+      </Principal>
+      <Dependent Role="Schedule">
+        <PropertyRef Name="AirplaneRegNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PilotSchedule">
+    <End Type="AirportDB.Pilot" Role="Pilot" Multiplicity="1" />
+    <End Type="AirportDB.Schedule" Role="Schedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pilot">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Schedule">
+        <PropertyRef Name="PilotId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PilotSchedule1">
+    <End Type="AirportDB.Pilot" Role="Pilot" Multiplicity="0..1" />
+    <End Type="AirportDB.Schedule" Role="Schedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pilot">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Schedule">
+        <PropertyRef Name="PilotIdCo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

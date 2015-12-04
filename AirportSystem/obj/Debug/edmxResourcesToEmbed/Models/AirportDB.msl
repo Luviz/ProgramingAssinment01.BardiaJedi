@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AirportDBStoreContainer" CdmEntityContainer="AirportDBContainer">
+    <EntitySetMapping Name="Airports">
+      <EntityTypeMapping TypeName="IsTypeOf(AirportDB.Airport)">
+        <MappingFragment StoreEntitySet="Airports">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Airplanes">
+      <EntityTypeMapping TypeName="IsTypeOf(AirportDB.Airplane)">
+        <MappingFragment StoreEntitySet="Airplanes">
+          <ScalarProperty Name="RegNumber" ColumnName="RegNumber" />
+          <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+          <ScalarProperty Name="Length" ColumnName="Length" />
+          <ScalarProperty Name="AirplaneTypesId" ColumnName="AirplaneTypesId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Citys">
+      <EntityTypeMapping TypeName="IsTypeOf(AirportDB.City)">
+        <MappingFragment StoreEntitySet="Citys">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PilotSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AirportDB.Pilot)">
+        <MappingFragment StoreEntitySet="PilotSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FName" ColumnName="FName" />
+          <ScalarProperty Name="LName" ColumnName="LName" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AirplaneTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(AirportDB.AirplaneType)">
+        <MappingFragment StoreEntitySet="AirplaneTypes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pilot_AirPlaneTypeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AirportDB.Pilot_AirPlaneType)">
+        <MappingFragment StoreEntitySet="Pilot_AirPlaneTypeSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AirplaneTypesId" ColumnName="AirplaneTypesId" />
+          <ScalarProperty Name="PilotId" ColumnName="PilotId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ScheduleSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AirportDB.Schedule)">
+        <MappingFragment StoreEntitySet="ScheduleSet">
+          <ScalarProperty Name="ETD" ColumnName="ETD" />
+          <ScalarProperty Name="ETA" ColumnName="ETA" />
+          <ScalarProperty Name="FlightNumber" ColumnName="FlightNumber" />
+          <ScalarProperty Name="FromAirportId" ColumnName="FromAirportId" />
+          <ScalarProperty Name="ToAirportId" ColumnName="ToAirportId" />
+          <ScalarProperty Name="AirplaneRegNumber" ColumnName="AirplaneRegNumber" />
+          <ScalarProperty Name="PilotId" ColumnName="PilotId" />
+          <ScalarProperty Name="PilotIdCo" ColumnName="PilotIdCo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
