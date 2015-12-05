@@ -174,6 +174,7 @@
     <Compile Include="Controllers\AirportControllers\AirportsController.cs" />
     <Compile Include="Controllers\AirportControllers\CitiesController.cs" />
     <Compile Include="Controllers\AirportControllers\PilotsController.cs" />
+    <Compile Include="Controllers\AirportControllers\SchedulesController.cs" />
     <Compile Include="Controllers\AirportControllers\SharedController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -309,17 +310,22 @@
     <Content Include="Views\Pilots\Details.cshtml" />
     <Content Include="Views\Pilots\Edit.cshtml" />
     <Content Include="Views\Pilots\Index.cshtml" />
-    <Content Include="Views\Airplanes\Create.cshtml" />
-    <Content Include="Views\Airplanes\Delete.cshtml" />
-    <Content Include="Views\Airplanes\Details.cshtml" />
-    <Content Include="Views\Airplanes\Edit.cshtml" />
-    <Content Include="Views\Airplanes\Index.cshtml" />
     <Content Include="Views\Airports\Create.cshtml" />
     <Content Include="Views\Airports\Delete.cshtml" />
     <Content Include="Views\Airports\Details.cshtml" />
     <Content Include="Views\Airports\Edit.cshtml" />
     <Content Include="Views\Airports\Index.cshtml" />
     <Content Include="Views\Shared\_AddSchedule.cshtml" />
+    <Content Include="Views\Schedules\Create.cshtml" />
+    <Content Include="Views\Schedules\Delete.cshtml" />
+    <Content Include="Views\Schedules\Details.cshtml" />
+    <Content Include="Views\Schedules\Edit.cshtml" />
+    <Content Include="Views\Schedules\Index.cshtml" />
+    <Content Include="Views\Airplanes\Create.cshtml" />
+    <Content Include="Views\Airplanes\Delete.cshtml" />
+    <Content Include="Views\Airplanes\Details.cshtml" />
+    <Content Include="Views\Airplanes\Edit.cshtml" />
+    <Content Include="Views\Airplanes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

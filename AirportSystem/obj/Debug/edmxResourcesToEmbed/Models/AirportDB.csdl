@@ -65,8 +65,8 @@
       <PropertyRef Name="RegNumber" />
     </Key>
     <Property Name="RegNumber" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-    <Property Name="Capacity" Type="Int16" Nullable="false" />
-    <Property Name="Length" Type="Double" Nullable="false" />
+    <Property Name="Capacity" Type="Int32" Nullable="false" />
+    <Property Name="Length" Type="Int32" Nullable="false" />
     <NavigationProperty Name="AirplaneTypes" Relationship="AirportDB.AirplaneTypesAirplane" FromRole="Airplane" ToRole="AirplaneTypes" />
     <Property Name="AirplaneTypesId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Schedule" Relationship="AirportDB.AirplaneSchedule" FromRole="Airplane" ToRole="Schedule" />

@@ -1,0 +1,74 @@
+﻿@model AirportSystem.Models.Schedule
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Schedule</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ETA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ETA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ETD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ETD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.From.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.From.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.To.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.To.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Airplane.RegNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Airplane.RegNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PilotSet.FName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PilotSet.FName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PilotSet1.FName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PilotSet1.FName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.FlightNumber }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

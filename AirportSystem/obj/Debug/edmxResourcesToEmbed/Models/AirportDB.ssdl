@@ -7,8 +7,8 @@ warning 6002: The table/view '4EDC320A6BADD577EB1ED3A7AC132E13_SUAL STUDIO 2015\
       <PropertyRef Name="RegNumber" />
     </Key>
     <Property Name="RegNumber" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Capacity" Type="smallint" Nullable="false" />
-    <Property Name="Length" Type="float" Nullable="false" />
+    <Property Name="Capacity" Type="int" Nullable="false" />
+    <Property Name="Length" Type="int" Nullable="false" />
     <Property Name="AirplaneTypesId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="AirplaneTypes">

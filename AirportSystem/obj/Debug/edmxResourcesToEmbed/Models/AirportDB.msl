@@ -13,8 +13,8 @@
     <EntitySetMapping Name="Airplanes">
       <EntityTypeMapping TypeName="IsTypeOf(AirportDB.Airplane)">
         <MappingFragment StoreEntitySet="Airplanes">
-          <ScalarProperty Name="RegNumber" ColumnName="RegNumber" />
           <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+          <ScalarProperty Name="RegNumber" ColumnName="RegNumber" />
           <ScalarProperty Name="Length" ColumnName="Length" />
           <ScalarProperty Name="AirplaneTypesId" ColumnName="AirplaneTypesId" />
         </MappingFragment>
@@ -58,14 +58,14 @@
     <EntitySetMapping Name="ScheduleSet">
       <EntityTypeMapping TypeName="IsTypeOf(AirportDB.Schedule)">
         <MappingFragment StoreEntitySet="ScheduleSet">
-          <ScalarProperty Name="ETD" ColumnName="ETD" />
-          <ScalarProperty Name="ETA" ColumnName="ETA" />
           <ScalarProperty Name="FlightNumber" ColumnName="FlightNumber" />
           <ScalarProperty Name="FromAirportId" ColumnName="FromAirportId" />
           <ScalarProperty Name="ToAirportId" ColumnName="ToAirportId" />
           <ScalarProperty Name="AirplaneRegNumber" ColumnName="AirplaneRegNumber" />
           <ScalarProperty Name="PilotId" ColumnName="PilotId" />
           <ScalarProperty Name="PilotIdCo" ColumnName="PilotIdCo" />
+          <ScalarProperty Name="ETA" ColumnName="ETA" />
+          <ScalarProperty Name="ETD" ColumnName="ETD" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

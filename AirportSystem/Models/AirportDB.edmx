@@ -15,8 +15,8 @@ warning 6002: The table/view '4EDC320A6BADD577EB1ED3A7AC132E13_SUAL STUDIO 2015\
             
           </Key>
           <Property Name="RegNumber" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Capacity" Type="smallint" Nullable="false" />
-          <Property Name="Length" Type="float" Nullable="false" />
+          <Property Name="Capacity" Type="int" Nullable="false" />
+          <Property Name="Length" Type="int" Nullable="false" />
           <Property Name="AirplaneTypesId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="AirplaneTypes">
@@ -300,8 +300,8 @@ warning 6002: The table/view '4EDC320A6BADD577EB1ED3A7AC132E13_SUAL STUDIO 2015\
             <PropertyRef Name="RegNumber" />
           </Key>
           <Property Name="RegNumber" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Capacity" Type="Int16" Nullable="false" />
-          <Property Name="Length" Type="Double" Nullable="false" />
+          <Property Name="Capacity" Type="Int32" Nullable="false" />
+          <Property Name="Length" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AirplaneTypes" Relationship="AirportDB.AirplaneTypesAirplane" FromRole="Airplane" ToRole="AirplaneTypes" />
           <Property Name="AirplaneTypesId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Schedule" Relationship="AirportDB.AirplaneSchedule" FromRole="Airplane" ToRole="Schedule" />
@@ -503,8 +503,8 @@ warning 6002: The table/view '4EDC320A6BADD577EB1ED3A7AC132E13_SUAL STUDIO 2015\
     <EntitySetMapping Name="Airplanes">
       <EntityTypeMapping TypeName="IsTypeOf(AirportDB.Airplane)">
         <MappingFragment StoreEntitySet="Airplanes">
-          <ScalarProperty Name="RegNumber" ColumnName="RegNumber" />
-          <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="RegNumber" ColumnName="RegNumber" />
           <ScalarProperty Name="Length" ColumnName="Length" />
           <ScalarProperty Name="AirplaneTypesId" ColumnName="AirplaneTypesId" />
         </MappingFragment>
@@ -548,14 +548,14 @@ warning 6002: The table/view '4EDC320A6BADD577EB1ED3A7AC132E13_SUAL STUDIO 2015\
     <EntitySetMapping Name="ScheduleSet">
       <EntityTypeMapping TypeName="IsTypeOf(AirportDB.Schedule)">
         <MappingFragment StoreEntitySet="ScheduleSet">
-          <ScalarProperty Name="ETD" ColumnName="ETD" />
-                <ScalarProperty Name="ETA" ColumnName="ETA" />
-                <ScalarProperty Name="FlightNumber" ColumnName="FlightNumber" />
+          <ScalarProperty Name="FlightNumber" ColumnName="FlightNumber" />
           <ScalarProperty Name="FromAirportId" ColumnName="FromAirportId" />
           <ScalarProperty Name="ToAirportId" ColumnName="ToAirportId" />
           <ScalarProperty Name="AirplaneRegNumber" ColumnName="AirplaneRegNumber" />
           <ScalarProperty Name="PilotId" ColumnName="PilotId" />
           <ScalarProperty Name="PilotIdCo" ColumnName="PilotIdCo" />
+          <ScalarProperty Name="ETA" ColumnName="ETA" />
+          <ScalarProperty Name="ETD" ColumnName="ETD" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

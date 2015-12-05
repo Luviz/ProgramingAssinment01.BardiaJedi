@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/01/2015 09:47:52
+-- Date Created: 12/05/2015 12:04:37
 -- Generated from EDMX file: C:\Users\Administratör\Documents\Visual Studio 2015\Projects\ProgramingAssinment01.BardiaJedi\AirportSystem\Models\AirportDB.edmx
 -- --------------------------------------------------
 
@@ -17,11 +17,59 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[AirportDBStoreContainer].[FK_AirplaneTypesAirplane]', 'F') IS NOT NULL
+    ALTER TABLE [AirportDBStoreContainer].[Airplanes] DROP CONSTRAINT [FK_AirplaneTypesAirplane];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AirplaneTypesPilot_AirPlaneType]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Pilot_AirPlaneTypeSet] DROP CONSTRAINT [FK_AirplaneTypesPilot_AirPlaneType];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AirportCity]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Airports] DROP CONSTRAINT [FK_AirportCity];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AirportSchedule]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ScheduleSet] DROP CONSTRAINT [FK_AirportSchedule];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CityPilot]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PilotSet] DROP CONSTRAINT [FK_CityPilot];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PilotPilot_AirPlaneType]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Pilot_AirPlaneTypeSet] DROP CONSTRAINT [FK_PilotPilot_AirPlaneType];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PilotSchedule]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ScheduleSet] DROP CONSTRAINT [FK_PilotSchedule];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PilotSchedule1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ScheduleSet] DROP CONSTRAINT [FK_PilotSchedule1];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ScheduleAirportFrom]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ScheduleSet] DROP CONSTRAINT [FK_ScheduleAirportFrom];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[AirplaneTypes]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AirplaneTypes];
+GO
+IF OBJECT_ID(N'[dbo].[Airports]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Airports];
+GO
+IF OBJECT_ID(N'[dbo].[Citys]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Citys];
+GO
+IF OBJECT_ID(N'[dbo].[Pilot_AirPlaneTypeSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Pilot_AirPlaneTypeSet];
+GO
+IF OBJECT_ID(N'[dbo].[PilotSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PilotSet];
+GO
+IF OBJECT_ID(N'[dbo].[ScheduleSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ScheduleSet];
+GO
+IF OBJECT_ID(N'[AirportDBStoreContainer].[Airplanes]', 'U') IS NOT NULL
+    DROP TABLE [AirportDBStoreContainer].[Airplanes];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -38,8 +86,8 @@ GO
 -- Creating table 'Airplanes'
 CREATE TABLE [dbo].[Airplanes] (
     [RegNumber] nvarchar(max)  NOT NULL,
-    [Capacity] smallint  NOT NULL,
-    [Length] float  NOT NULL,
+    [Capacity] int  NOT NULL,
+    [Length] int  NOT NULL,
     [AirplaneTypesId] int  NOT NULL
 );
 GO
@@ -82,7 +130,9 @@ CREATE TABLE [dbo].[ScheduleSet] (
     [ToAirportId] int  NOT NULL,
     [AirplaneRegNumber] nvarchar(max)  NOT NULL,
     [PilotId] int  NOT NULL,
-    [PilotIdCo] int  NULL
+    [PilotIdCo] int  NULL,
+    [ETA] datetime  NOT NULL,
+    [ETD] datetime  NOT NULL
 );
 GO
 
