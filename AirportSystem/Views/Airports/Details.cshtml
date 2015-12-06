@@ -32,3 +32,15 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+<hr />
+<div class="row">
+	<div class="col-md-6">
+		<h4>Arrivels</h4>
+		@Html.Partial("_ScheduleList", Model.Arrivel.ToList());
+	</div>
+	<div class="col-md-6">
+		<h4>Depathers</h4>
+		@Html.Partial("_ScheduleList", Model.Deparcher.ToList());
+
+	</div>
+</div>
