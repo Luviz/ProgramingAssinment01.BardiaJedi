@@ -12,6 +12,8 @@ namespace AirportSystem.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class AirportDBContainer : DbContext
     {
@@ -32,5 +34,26 @@ namespace AirportSystem.Models
         public virtual DbSet<AirplaneType> AirplaneTypes { get; set; }
         public virtual DbSet<Pilot_AirPlaneType> Pilot_AirPlaneTypeSet { get; set; }
         public virtual DbSet<Schedule> ScheduleSet { get; set; }
+    
+        public virtual int insertAirplane(string regNr, Nullable<int> capa, Nullable<int> leng, Nullable<int> type)
+        {
+            var regNrParameter = regNr != null ?
+                new ObjectParameter("regNr", regNr) :
+                new ObjectParameter("regNr", typeof(string));
+    
+            var capaParameter = capa.HasValue ?
+                new ObjectParameter("capa", capa) :
+                new ObjectParameter("capa", typeof(int));
+    
+            var lengParameter = leng.HasValue ?
+                new ObjectParameter("leng", leng) :
+                new ObjectParameter("leng", typeof(int));
+    
+            var typeParameter = type.HasValue ?
+                new ObjectParameter("type", type) :
+                new ObjectParameter("type", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("insertAirplane", regNrParameter, capaParameter, lengParameter, typeParameter);
+        }
     }
 }

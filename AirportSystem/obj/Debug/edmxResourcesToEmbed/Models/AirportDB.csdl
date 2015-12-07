@@ -48,6 +48,12 @@
       <End Role="Pilot" EntitySet="PilotSet" />
       <End Role="Schedule" EntitySet="ScheduleSet" />
     </AssociationSet>
+    <FunctionImport Name="insertAirplane">
+      <Parameter Name="regNr" Mode="In" Type="String" />
+      <Parameter Name="capa" Mode="In" Type="Int32" />
+      <Parameter Name="leng" Mode="In" Type="Int32" />
+      <Parameter Name="type" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="Airport">
     <Key>
@@ -64,7 +70,7 @@
     <Key>
       <PropertyRef Name="RegNumber" />
     </Key>
-    <Property Name="RegNumber" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="RegNumber" Type="String" Nullable="false" MaxLength="6" Unicode="true" FixedLength="false" />
     <Property Name="Capacity" Type="Int32" Nullable="false" />
     <Property Name="Length" Type="Int32" Nullable="false" />
     <NavigationProperty Name="AirplaneTypes" Relationship="AirportDB.AirplaneTypesAirplane" FromRole="Airplane" ToRole="AirplaneTypes" />

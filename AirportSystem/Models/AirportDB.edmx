@@ -5,16 +5,11 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="AirportDB.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view '4EDC320A6BADD577EB1ED3A7AC132E13_SUAL STUDIO 2015\PROJECTS\PROGRAMINGASSINMENT01.BARDIAJEDI\AIRPORTSYSTEM\APP_DATA\AIRPORTDB.MDF.dbo.Airplanes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Airplanes">
           <Key>
             <PropertyRef Name="RegNumber" />
-            
-            
-            
           </Key>
-          <Property Name="RegNumber" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RegNumber" Type="nvarchar" MaxLength="6" Nullable="false" />
           <Property Name="Capacity" Type="int" Nullable="false" />
           <Property Name="Length" Type="int" Nullable="false" />
           <Property Name="AirplaneTypesId" Type="int" Nullable="false" />
@@ -179,21 +174,20 @@ warning 6002: The table/view '4EDC320A6BADD577EB1ED3A7AC132E13_SUAL STUDIO 2015\
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="insertAirplane" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="regNr" Type="nvarchar" Mode="In" />
+          <Parameter Name="capa" Type="int" Mode="In" />
+          <Parameter Name="leng" Type="int" Mode="In" />
+          <Parameter Name="type" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="AirportDBStoreContainer">
+          <EntitySet Name="Airplanes" EntityType="Self.Airplanes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AirplaneTypes" EntityType="Self.AirplaneTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Airports" EntityType="Self.Airports" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Citys" EntityType="Self.Citys" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pilot_AirPlaneTypeSet" EntityType="Self.Pilot_AirPlaneTypeSet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PilotSet" EntityType="Self.PilotSet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ScheduleSet" EntityType="Self.ScheduleSet" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Airplanes" EntityType="Self.Airplanes" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Airplanes].[RegNumber] AS [RegNumber], 
-    [Airplanes].[Capacity] AS [Capacity], 
-    [Airplanes].[Length] AS [Length], 
-    [Airplanes].[AirplaneTypesId] AS [AirplaneTypesId]
-    FROM [dbo].[Airplanes] AS [Airplanes]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_AirplaneTypesAirplane" Association="Self.FK_AirplaneTypesAirplane">
             <End Role="AirplaneTypes" EntitySet="AirplaneTypes" />
             <End Role="Airplanes" EntitySet="Airplanes" />
@@ -283,6 +277,12 @@ warning 6002: The table/view '4EDC320A6BADD577EB1ED3A7AC132E13_SUAL STUDIO 2015\
             <End Role="Pilot" EntitySet="PilotSet" />
             <End Role="Schedule" EntitySet="ScheduleSet" />
           </AssociationSet>
+          <FunctionImport Name="insertAirplane">
+            <Parameter Name="regNr" Mode="In" Type="String" />
+            <Parameter Name="capa" Mode="In" Type="Int32" />
+            <Parameter Name="leng" Mode="In" Type="Int32" />
+            <Parameter Name="type" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Airport">
           <Key>
@@ -299,7 +299,7 @@ warning 6002: The table/view '4EDC320A6BADD577EB1ED3A7AC132E13_SUAL STUDIO 2015\
           <Key>
             <PropertyRef Name="RegNumber" />
           </Key>
-          <Property Name="RegNumber" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="RegNumber" Type="String" Nullable="false" MaxLength="6" Unicode="true" FixedLength="false" />
           <Property Name="Capacity" Type="Int32" Nullable="false" />
           <Property Name="Length" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AirplaneTypes" Relationship="AirportDB.AirplaneTypesAirplane" FromRole="Airplane" ToRole="AirplaneTypes" />
@@ -509,6 +509,16 @@ warning 6002: The table/view '4EDC320A6BADD577EB1ED3A7AC132E13_SUAL STUDIO 2015\
           <ScalarProperty Name="AirplaneTypesId" ColumnName="AirplaneTypesId" />
         </MappingFragment>
       </EntityTypeMapping>
+            <EntityTypeMapping TypeName="AirportDB.Airplane">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="AirportDB.Store.insertAirplane" >
+                  <ScalarProperty Name="AirplaneTypesId" ParameterName="type" />
+                  <ScalarProperty Name="Length" ParameterName="leng" />
+                  <ScalarProperty Name="Capacity" ParameterName="capa" />
+                  <ScalarProperty Name="RegNumber" ParameterName="regNr" />
+                </InsertFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Citys">
       <EntityTypeMapping TypeName="IsTypeOf(AirportDB.City)">
@@ -559,6 +569,7 @@ warning 6002: The table/view '4EDC320A6BADD577EB1ED3A7AC132E13_SUAL STUDIO 2015\
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="insertAirplane" FunctionName="AirportDB.Store.insertAirplane" />
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

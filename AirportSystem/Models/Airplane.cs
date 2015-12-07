@@ -9,17 +9,17 @@
 
 namespace AirportSystem.Models
 {
-	using System;
-	using System.Collections.Generic;
-	using System.ComponentModel.DataAnnotations;
-
-	public partial class Airplane
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class Airplane
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Airplane()
         {
             this.Schedule = new HashSet<Schedule>();
         }
+    
         public string RegNumber { get; set; }
         public int Capacity { get; set; }
         public int Length { get; set; }
