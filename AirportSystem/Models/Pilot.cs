@@ -26,8 +26,10 @@ namespace AirportSystem.Models
         public string FName { get; set; }
         public string LName { get; set; }
         public int CityId { get; set; }
-    
-        public virtual City City { get; set; }
+
+		public string FullName { get { return string.Format("{0}, {1}", LName, FName); } }
+
+		public virtual City City { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pilot_AirPlaneType> Pilot_AirPlaneType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
