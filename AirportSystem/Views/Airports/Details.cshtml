@@ -45,10 +45,16 @@
 
 	</div>
 </div>
-
-<link href="~/Content/bootstrap-datepicker.standalone.min.css" rel="stylesheet" />
-<script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+<div id="output">output</div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script>
-	$('.date-Picker').datepicker({
+	$("#output").append("Hello");
+	$.ajax({
+		url: 'api/Pilot_AirPlaneType',
+		context: document.body
+
+	}).done(function () {
+		$(this).addClass("done");
+		console.log(data);
 	});
 </script>

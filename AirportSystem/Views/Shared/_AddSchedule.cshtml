@@ -33,7 +33,7 @@
 				<div class="form-group">
 					@Html.LabelFor(model => model.AirplaneRegNumber, "AirplaneRegNumber", htmlAttributes: new { @class = "control-label col-md-3" })
 					<div class="col-md-9">
-						@Html.DropDownList("AirplaneRegNumber", new SelectList(db.Airplanes, "RegNumber", "RegNumber"), "PlaneRegnr", htmlAttributes: new { @class = "form-control" })
+						@Html.DropDownList("AirplaneRegNumber", new SelectList(db.Airplanes, "RegNumber", "RegNumber"), "PlaneRegnr", htmlAttributes: new {id = "apForm", @class = "form-control" })
 						@*@Html.ValidationMessageFor(model => model.AirplaneRegNumber, "", new { @class = "text-danger" })*@
 					</div>
 				</div>
@@ -41,7 +41,12 @@
 				<div class="form-group">
 					@Html.LabelFor(model => model.PilotId, "PilotId", htmlAttributes: new { @class = "control-label col-md-3" })
 					<div class="col-md-9">
-						@Html.DropDownList("PilotId", new SelectList(db.PilotSet, "Id", "FullName"), "Pilot", htmlAttributes: new { @class = "form-control" })
+						<select id="PilotList" class="form-control" disabled=true>
+							<option>Pilot</option>
+							<option value="Meh">text</option>
+							<option value="Meh">text</option>
+						</select>
+						@*@Html.DropDownList("PilotId", new SelectList(db.PilotSet, "Id", "FullName"), "Pilot", htmlAttributes: new { @class = "form-control" })*@
 						@*@Html.ValidationMessageFor(model => model.PilotId, "", new { @class = "text-danger" })*@
 					</div>
 				</div>
@@ -80,3 +85,23 @@
 	</div>
 }
 
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<link href="~/Content/bootstrap-datepicker.standalone.min.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+<script>
+	$('.date-Picker').datepicker({
+	});
+</script>
+<script>
+	console.log("LOGED");
+	$("#apForm").click(function () {
+		console.log("Clicked" + $("#apForm").val());
+		if ($("#apForm").val() != '') {
+			$("#PilotList").prop("disabled", false);
+			//poulate List
+		} else {
+			$("#PilotList").prop("disabled", true);
+		}
+
+	});
+</script>
