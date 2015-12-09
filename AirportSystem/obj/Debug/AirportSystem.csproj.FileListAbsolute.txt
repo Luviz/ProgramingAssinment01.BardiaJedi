@@ -107,3 +107,4 @@ C:\Users\Administratör\documents\visual studio 2015\Projects\ProgramingAssinmen
 C:\Users\Administratör\documents\visual studio 2015\Projects\ProgramingAssinment01.BardiaJedi\AirportSystem\bin\zh-Hant\System.Spatial.resources.dll
 C:\Users\Administratör\documents\visual studio 2015\Projects\ProgramingAssinment01.BardiaJedi\AirportSystem\obj\Debug\AirportSystem.dll
 C:\Users\Administratör\documents\visual studio 2015\Projects\ProgramingAssinment01.BardiaJedi\AirportSystem\obj\Debug\AirportSystem.pdb
+C:\Users\Administratör\documents\visual studio 2015\Projects\ProgramingAssinment01.BardiaJedi\AirportSystem\obj\Debug\AirportSystem.csprojResolveAssemblyReference.cache

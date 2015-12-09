@@ -205,6 +205,7 @@
     <Compile Include="Controllers\AirportControllers\PilotsController.cs" />
     <Compile Include="Controllers\AirportControllers\SchedulesController.cs" />
     <Compile Include="Controllers\AirportControllers\SharedController.cs" />
+    <Compile Include="Controllers\Api\AirplanesController.cs" />
     <Compile Include="Controllers\Api\Pilot_AirPlaneTypeController.cs" />
     <Compile Include="Controllers\Api\qualifiedPilotsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -302,7 +303,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

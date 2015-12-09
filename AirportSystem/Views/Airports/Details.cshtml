@@ -45,16 +45,3 @@
 
 	</div>
 </div>
-<div id="output">output</div>
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script>
-	$("#output").append("Hello");
-	$.ajax({
-		url: 'api/Pilot_AirPlaneType',
-		context: document.body
-
-	}).done(function () {
-		$(this).addClass("done");
-		console.log(data);
-	});
-</script>

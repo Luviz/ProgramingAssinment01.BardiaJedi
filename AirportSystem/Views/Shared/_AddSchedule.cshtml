@@ -3,7 +3,7 @@
 @{
 	var db = new AirportSystem.Models.AirportDBContainer();
 }
-@using (Html.BeginForm()) { //TODO Fix the pathing
+@using (Html.BeginForm("_AddSchedule", "Shared")) { //TODO Fix the pathing
 	@Html.AntiForgeryToken()
 
 	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddSchedule">Add Schedule</button>
@@ -33,7 +33,7 @@
 				<div class="form-group">
 					@Html.LabelFor(model => model.AirplaneRegNumber, "AirplaneRegNumber", htmlAttributes: new { @class = "control-label col-md-3" })
 					<div class="col-md-9">
-						@Html.DropDownList("AirplaneRegNumber", new SelectList(db.Airplanes, "RegNumber", "RegNumber"), "PlaneRegnr", htmlAttributes: new {id = "apForm", @class = "form-control" })
+						@Html.DropDownList("AirplaneRegNumber", new SelectList(db.Airplanes, "RegNumber", "RegNumber"), "PlaneRegnr", htmlAttributes: new { id = "apForm", @class = "form-control" })
 						@*@Html.ValidationMessageFor(model => model.AirplaneRegNumber, "", new { @class = "text-danger" })*@
 					</div>
 				</div>
@@ -41,7 +41,7 @@
 				<div class="form-group">
 					@Html.LabelFor(model => model.PilotId, "PilotId", htmlAttributes: new { @class = "control-label col-md-3" })
 					<div class="col-md-9">
-						<select id="PilotList" class="form-control" disabled=true>
+						<select id="PilotList" name="PilotId" class="form-control" disabled=true>
 							<option>Pilot</option>
 							<option value="Meh">text</option>
 							<option value="Meh">text</option>
@@ -97,11 +97,33 @@
 	$("#apForm").click(function () {
 		console.log("Clicked" + $("#apForm").val());
 		if ($("#apForm").val() != '') {
-			$("#PilotList").prop("disabled", false);
-			//poulate List
+			PopulateList($("#apForm").val());
 		} else {
 			$("#PilotList").prop("disabled", true);
 		}
 
 	});
+
+	function PopulateList(apRegNr) {
+		console.log("populateList");
+
+		$("#PilotList").empty();
+		$("#PilotList").append("<option selected>Pilot</option>");
+
+		$.ajax({
+			dataType: "json",
+			url: "/api/qualifiedPilots/"+ apRegNr,
+			success: function (d) {
+				console.log("SUCCESS");
+				$("#PilotList").prop("disabled", false);
+				$.each(d, function (key, item) {
+					$("<option value='" + key + "'>" + item + "</options>").appendTo("#PilotList");
+				});
+			},
+			error: function () {
+				console.log("ERROR");
+				$('#PilotList').prop("disabled", true);
+			}
+		});
+	}
 </script>
