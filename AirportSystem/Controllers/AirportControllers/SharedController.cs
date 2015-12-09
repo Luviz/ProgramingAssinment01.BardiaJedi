@@ -18,5 +18,12 @@ namespace AirportSystem.Controllers.AirportControllers {
 				return new SchedulesController().Create(s);
 			}
 		}
+
+
+		public ActionResult Search(string sQuery) {
+			int id = db.Airports.Where(a => a.Name.Equals(sQuery)).FirstOrDefault().Id;
+			return RedirectToAction("Details", "Airports",new { id = id });
+		}
+
 	}
 }

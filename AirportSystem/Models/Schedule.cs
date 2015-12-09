@@ -9,10 +9,11 @@
 
 namespace AirportSystem.Models
 {
-    using System;
-    using System.Collections.Generic;
-    
-    public partial class Schedule
+	using System;
+	using System.Collections.Generic;
+	using System.ComponentModel.DataAnnotations;
+
+	public partial class Schedule
     {
         public int FlightNumber { get; set; }
         public int FromAirportId { get; set; }
@@ -20,7 +21,10 @@ namespace AirportSystem.Models
         public string AirplaneRegNumber { get; set; }
         public int PilotId { get; set; }
         public Nullable<int> PilotIdCo { get; set; }
+
+		[DisplayFormat (DataFormatString ="{0:yy-MM-dd}")]
         public System.DateTime ETA { get; set; }
+		[DisplayFormat (DataFormatString ="{0:yy-MM-dd}")]
         public System.DateTime ETD { get; set; }
     
         public virtual Airport From { get; set; }
