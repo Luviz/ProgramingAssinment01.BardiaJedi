@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace AirportSystem.Controllers {
 	public class HomeController : Controller {
 		public ActionResult Index() {
-			return View();
+			return View(new Models.AirportDBContainer().Airports);
 		}
 
 		public ActionResult About() {

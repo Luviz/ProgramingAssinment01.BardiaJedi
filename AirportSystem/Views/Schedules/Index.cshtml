@@ -1,76 +1,77 @@
 ﻿@model IEnumerable<AirportSystem.Models.Schedule>
 
 @{
-    ViewBag.Title = "Index";
+	ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+	@Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ETA)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ETD)
-        </th>
-        <th>
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.ETA)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.ETD)
+		</th>
+		<th>
 			From
-            @*@Html.DisplayNameFor(model => model.From.Name)*@
-        </th>
-        <th>
+			@*@Html.DisplayNameFor(model => model.From.Name)*@
+		</th>
+		<th>
 			To
-            @*@Html.DisplayNameFor(model => model.To.Name)*@
-        </th>
-        <th>
-			Plane 
-            @*@Html.DisplayNameFor(model => model.Airplane.RegNumber)*@
-        </th>
-        <th>
+			@*@Html.DisplayNameFor(model => model.To.Name)*@
+		</th>
+		<th>
+			Plane
+			@*@Html.DisplayNameFor(model => model.Airplane.RegNumber)*@
+		</th>
+		<th>
 			Pilot
-            @*@Html.DisplayNameFor(model => model.PilotSet.FName)*@
-        </th>
-        <th>
+			@*@Html.DisplayNameFor(model => model.PilotSet.FName)*@
+		</th>
+		<th>
 			Co Pilot
-            @*@Html.DisplayNameFor(model => model.PilotSet1.FName)*@
-        </th>
-        <th></th>
-    </tr>
+			@*@Html.DisplayNameFor(model => model.PilotSet1.FName)*@
+		</th>
+		<th></th>
+	</tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ETA)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ETD)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.From.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.To.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Airplane.RegNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PilotSet.LName),
-            @Html.DisplayFor(modelItem => item.PilotSet.FName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PilotSet1.LName),
-            @Html.DisplayFor(modelItem => item.PilotSet1.FName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.FlightNumber }) |
-            @Html.ActionLink("Details", "Details", new { id=item.FlightNumber }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.FlightNumber })
-        </td>
-    </tr>
-}
+	@foreach (var item in Model) {
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.ETA)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.ETD)
+			</td>
+			<td>
+				@Html.ActionLink(item.From.Name, "Details", "Airports", new { id = item.From.Id }, null)
+			</td>
+			<td>
+				@Html.ActionLink(item.To.Name, "Details", "Airports", new { id = item.To.Id }, null)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Airplane.RegNumber)
+			</td>
+			<td>
+				@Html.ActionLink(item.PilotSet.FullName, "Details", "Pilots", new { id = item.PilotId }, null)
+			</td>
+			<td>
+				@* CoPilot is nullable *@
+				@if (item.PilotSet1 != null) {
+					@Html.ActionLink(item.PilotSet1.FullName, "Details", "Pilots", new { id = item.PilotIdCo }, null)
+				}
+			</td>
+			<td>
+				@Html.ActionLink("Edit", "Edit", new { id = item.FlightNumber }) |
+				@Html.ActionLink("Details", "Details", new { id = item.FlightNumber }) |
+				@Html.ActionLink("Delete", "Delete", new { id = item.FlightNumber })
+			</td>
+		</tr>
+	}
 
 </table>

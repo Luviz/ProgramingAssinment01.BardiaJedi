@@ -21,7 +21,7 @@ namespace AirportSystem.Controllers.AirportControllers {
 
 
 		public ActionResult Search(string sQuery) {
-			int id = db.Airports.Where(a => a.Name.Equals(sQuery)).FirstOrDefault().Id;
+			int id = db.Airports.Where(a => a.Name.Contains(sQuery)).FirstOrDefault().Id;
 			return RedirectToAction("Details", "Airports",new { id = id });
 		}
 

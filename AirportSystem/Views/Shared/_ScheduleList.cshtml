@@ -20,7 +20,7 @@
 		</th>
 	</tr>
 	<tbody>
-		@foreach (var item in Model) {
+		@foreach (var item in Model.OrderBy(m => m.ETA).OrderBy(m => m.ETD)) {
 			<tr onclick="Goto('@Url.Action("Details", "Schedules", new { id=item.FlightNumber })')">
 				<td>
 					@Html.DisplayFor(modelItem => item.ETA)
