@@ -82,9 +82,11 @@
 <div class="modal fade " id="AddLicenseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content ">
-
 			@using (Html.BeginForm("AddLicense", "Pilots", new { id = Model.Id })) {
-				<div class="modal-body form-inline container text-center">
+
+				<div class="modal-body form-inline  text-center">
+
+					<h3>Add Licenses</h3>
 					<input class="form-control" autocomplete="off" list="licensesAvailable" placeholder="licenses" name="license" />
 					<input type="submit" value="ADD" class="btn btn-primary" />
 				</div>
