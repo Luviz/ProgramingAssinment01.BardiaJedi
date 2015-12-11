@@ -18,7 +18,7 @@
 					@Html.LabelFor(model => model.FromAirportId, "FromAirportId", htmlAttributes: new { @class = "control-label col-md-3" })
 					<div class="col-md-9">
 						@Html.DropDownList("FromAirportId", new SelectList(db.Airports, "Id", "Name"), "From", htmlAttributes: new { @class = "form-control" })
-						@*@Html.ValidationMessageFor(model => model.FromAirportId, "", new { @class = "text-danger" })*@
+						@Html.ValidationMessageFor(model => model.FromAirportId, "", new { @class = "text-danger" })
 					</div>
 				</div>
 
@@ -26,7 +26,7 @@
 					@Html.LabelFor(model => model.ToAirportId, "ToAirportId", htmlAttributes: new { @class = "control-label col-md-3" })
 					<div class="col-md-9">
 						@Html.DropDownList("ToAirportId", new SelectList(db.Airports, "Id", "Name"), "To", htmlAttributes: new { @class = "form-control" })
-						@*@Html.ValidationMessageFor(model => model.ToAirportId, "", new { @class = "text-danger" })*@
+						@Html.ValidationMessageFor(model => model.ToAirportId, "", new { @class = "text-danger" })
 					</div>
 				</div>
 
@@ -34,7 +34,7 @@
 					@Html.LabelFor(model => model.AirplaneRegNumber, "AirplaneRegNumber", htmlAttributes: new { @class = "control-label col-md-3" })
 					<div class="col-md-9">
 						@Html.DropDownList("AirplaneRegNumber", new SelectList(db.Airplanes, "RegNumber", "RegNumber"), "PlaneRegnr", htmlAttributes: new { id = "apForm", @class = "form-control" })
-						@*@Html.ValidationMessageFor(model => model.AirplaneRegNumber, "", new { @class = "text-danger" })*@
+						@Html.ValidationMessageFor(model => model.AirplaneRegNumber, "", new { @class = "text-danger" })
 					</div>
 				</div>
 
@@ -43,11 +43,8 @@
 					<div class="col-md-9">
 						<select id="PilotList" name="PilotId" class="form-control" disabled=true>
 							<option>Pilot</option>
-							<option value="Meh">text</option>
-							<option value="Meh">text</option>
 						</select>
-						@*@Html.DropDownList("PilotId", new SelectList(db.PilotSet, "Id", "FullName"), "Pilot", htmlAttributes: new { @class = "form-control" })*@
-						@*@Html.ValidationMessageFor(model => model.PilotId, "", new { @class = "text-danger" })*@
+						@Html.ValidationMessageFor(model => model.PilotId, "", new { @class = "text-danger" })
 					</div>
 				</div>
 
@@ -55,7 +52,7 @@
 					@Html.LabelFor(model => model.PilotIdCo, "PilotIdCo", htmlAttributes: new { @class = "control-label col-md-3" })
 					<div class="col-md-9">
 						@Html.DropDownList("PilotIdCo", new SelectList(db.PilotSet, "Id", "FullName"), "CoPilot", htmlAttributes: new { @class = "form-control" })
-						@*@Html.ValidationMessageFor(model => model.PilotIdCo, "", new { @class = "text-danger" })*@
+						@Html.ValidationMessageFor(model => model.PilotIdCo, "", new { @class = "text-danger" })
 					</div>
 				</div>
 

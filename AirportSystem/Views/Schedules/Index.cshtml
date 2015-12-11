@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-	@Html.ActionLink("Create New", "Create")
+	@Html.Partial("_AddSchedule", new AirportSystem.Models.Schedule())
 </p>
 <table class="table">
 	<tr>
@@ -19,23 +19,18 @@
 		</th>
 		<th>
 			From
-			@*@Html.DisplayNameFor(model => model.From.Name)*@
 		</th>
 		<th>
 			To
-			@*@Html.DisplayNameFor(model => model.To.Name)*@
 		</th>
 		<th>
 			Plane
-			@*@Html.DisplayNameFor(model => model.Airplane.RegNumber)*@
 		</th>
 		<th>
 			Pilot
-			@*@Html.DisplayNameFor(model => model.PilotSet.FName)*@
 		</th>
 		<th>
 			Co Pilot
-			@*@Html.DisplayNameFor(model => model.PilotSet1.FName)*@
 		</th>
 		<th></th>
 	</tr>
